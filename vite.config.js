@@ -77,15 +77,30 @@
 
 
 
+// import { defineConfig } from 'vite';
+// import react from '@vitejs/plugin-react';
+
+// export default defineConfig({
+//   plugins: [react()],
+//   base: "/Allie-Rusume-Builder-2.0/", // Change this to your repo name
+//   build: {
+//     outDir: "dist", // GitHub Pages needs the built files in 'dist'
+//   },
+// });
+
+
+
+
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  base: "/Allie-Rusume-Builder-2.0/", // Change this to your repo name
+  base: "/Allie-Rusume-Builder-2.0/", 
   build: {
-    outDir: "dist", // GitHub Pages needs the built files in 'dist'
+    outDir: "dist", 
   },
 });
+
 
 
