@@ -1,19 +1,16 @@
-name: Deploy Vite App
+name: Deploy Vite App to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # Ensures deployment only happens when pushing to main
-
-permissions:
-  contents: write
+      - main  # Runs when you push to main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Setup Node.js
@@ -21,24 +18,19 @@ jobs:
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: npm install
 
-      - name: Inject API Key into .env File
-        run: |
-          echo "VITE_OPENAI_API_KEY=${{ secrets.VITE_OPENAI_API_KEY }}" > .env
-          cat .env
-
-      - name: Build project
+      - name: Build Project
+        env:
+          VITE_OPENAI_API_KEY: ${{ secrets.VITE_OPENAI_API_KEY }}  # Inject API key from GitHub Secrets
         run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages  # Ensures deployment goes to gh-pages
-
+          branch: gh-pages  # Deploy built files to gh-pages branch
+          folder: dist       # Vite outputs to 'dist' by default
 
 
 
