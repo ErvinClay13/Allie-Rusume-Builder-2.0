@@ -3,7 +3,10 @@ name: Deploy Vite App to GitHub Pages
 on:
   push:
     branches:
-      - main  # Runs when you push to main
+      - main  # Runs when pushing to main
+
+permissions:
+  contents: write  # 🔥 Give write access to allow GitHub Actions to push
 
 jobs:
   deploy:
@@ -23,14 +26,15 @@ jobs:
 
       - name: Build Project
         env:
-          VITE_OPENAI_API_KEY: ${{ secrets.VITE_OPENAI_API_KEY }}  # Inject API key from GitHub Secrets
+          VITE_OPENAI_API_KEY: ${{ secrets.VITE_OPENAI_API_KEY }}
         run: npm run build
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages  # Deploy built files to gh-pages branch
-          folder: dist       # Vite outputs to 'dist' by default
+          branch: gh-pages  # Deploy to gh-pages branch
+          folder: dist       # Ensure Vite outputs to 'dist'
+          token: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub's built-in token
 
 
 
