@@ -46,31 +46,135 @@
 
 
 
+// import axios from "axios";
+
+// const API_KEY = import.meta.env.VITE_OPENAI_API_KEY; 
+// console.log(" Loaded API Key in Production:", import.meta.env.VITE_OPENAI_API_KEY);
+
+
+// export const generateContent = async (prompt) => {
+//   //  Check if the API Key is missing
+//   if (!API_KEY) {
+//     console.error(" API Key is missing! Check environment variables.");
+//     return "Error: API Key is missing";
+//   }
+
+//   try {
+//     console.log(" Sending API request to OpenAI...");
+    
+//     const response = await axios.post(
+//       "https://api.openai.com/v1/chat/completions",
+//       {
+//         model: "gpt-3.5-turbo",
+//         messages: [
+//           {
+//             role: "system",
+//             content: "You are a helpful assistant. Provide concise responses only.",
+//           },
+//           { role: "user", content: prompt },
+//         ],
+//         max_tokens: 40,
+//       },
+//       {
+//         headers: { Authorization: `Bearer ${API_KEY}` },
+//       }
+//     );
+
+//     console.log(" OpenAI API Response:", response.data); //  Log the API response
+
+//     let result = response.data.choices[0].message.content.trim();
+//     return result;
+//   } catch (error) {
+//     console.error(" Error generating content:", error.response ? error.response.data : error);
+//     return "Error generating content";
+//   }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import axios from "axios";
+
+// export const generateContent = async (prompt) => {
+//   // API key is only injected at build time via GitHub Actions
+//   const API_KEY = process.env.VITE_OPENAI_API_KEY;
+
+//   if (!API_KEY) {
+//     console.error("API Key is missing! Check environment variables.");
+//     return "Error: API Key is missing";
+//   }
+
+//   try {
+//     console.log("Sending API request to OpenAI...");
+
+//     const response = await axios.post(
+//       "https://api.openai.com/v1/chat/completions",
+//       {
+//         model: "gpt-3.5-turbo",
+//         messages: [
+//           { role: "system", content: "You are a helpful assistant. Provide concise responses only." },
+//           { role: "user", content: prompt },
+//         ],
+//         max_tokens: 40,
+//       },
+//       {
+//         headers: { Authorization: `Bearer ${API_KEY}` },
+//       }
+//     );
+
+//     console.log("OpenAI API Response:", response.data);
+
+//     let result = response.data.choices[0].message.content.trim();
+//     return result;
+//   } catch (error) {
+//     console.error("Error generating content:", error.response ? error.response.data : error);
+//     return "Error generating content";
+//   }
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import axios from "axios";
 
-const API_KEY = import.meta.env.VITE_OPENAI_API_KEY; 
-console.log(" Loaded API Key in Production:", import.meta.env.VITE_OPENAI_API_KEY);
-
-
 export const generateContent = async (prompt) => {
-  //  Check if the API Key is missing
+  // Use import.meta.env to access the API key at build time
+  const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
+
   if (!API_KEY) {
-    console.error(" API Key is missing! Check environment variables.");
+    console.error("API Key is missing! Check environment variables.");
     return "Error: API Key is missing";
   }
 
   try {
-    console.log(" Sending API request to OpenAI...");
-    
+    console.log("Sending API request to OpenAI...");
+
     const response = await axios.post(
       "https://api.openai.com/v1/chat/completions",
       {
         model: "gpt-3.5-turbo",
         messages: [
-          {
-            role: "system",
-            content: "You are a helpful assistant. Provide concise responses only.",
-          },
+          { role: "system", content: "You are a helpful assistant. Provide concise responses only." },
           { role: "user", content: prompt },
         ],
         max_tokens: 40,
@@ -80,16 +184,13 @@ export const generateContent = async (prompt) => {
       }
     );
 
-    console.log(" OpenAI API Response:", response.data); //  Log the API response
+    console.log("OpenAI API Response:", response.data);
 
-    let result = response.data.choices[0].message.content.trim();
-    return result;
+    return response.data.choices[0].message.content.trim();
   } catch (error) {
-    console.error(" Error generating content:", error.response ? error.response.data : error);
+    console.error("Error generating content:", error.response ? error.response.data : error);
     return "Error generating content";
   }
 };
-
-
 
 
