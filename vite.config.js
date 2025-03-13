@@ -98,9 +98,10 @@ export default defineConfig({
   plugins: [react()],
   base: "/Allie-Rusume-Builder-2.0/", 
   build: {
-    outDir: "dist", 
+    outDir: "dist",
   },
 });
+
 
 
 
