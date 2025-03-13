@@ -1,57 +1,14 @@
-# name: Deploy Vite App to GitHub Pages
-
-# on:
-#   push:
-#     branches:
-#       - main  # Runs only when pushing to main
-
-# permissions:
-#   contents: write  # Ensures GitHub Actions can push to gh-pages
-
-# jobs:
-#   deploy:
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout Repository
-#         uses: actions/checkout@v3
-
-#       - name: Setup Node.js
-#         uses: actions/setup-node@v3
-#         with:
-#           node-version: 18
-
-#       - name: Install Dependencies
-#         run: npm install
-
-#       - name: Build Project
-#         env:
-#           VITE_OPENAI_API_KEY: ${{ secrets.VITE_OPENAI_API_KEY }}
-#         run: npm run build
-
-#       - name: Deploy to GitHub Pages
-#         uses: JamesIves/github-pages-deploy-action@v4
-#         with:
-#           branch: gh-pages  # Deploy to gh-pages branch
-#           folder: dist       #  This ensures dist/ is used for deployment
-#           token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
-
-
-
-
-
-
-
-
 name: Deploy Vite App to GitHub Pages
 
 on:
   push:
     branches:
-      - main  # ✅ Only trigger deployment when pushing to main
+      - main  
+      
+  workflow_dispatch:  
 
 permissions:
-  contents: write  # ✅ Allows GitHub Actions to push to gh-pages
+  contents: write  
 
 jobs:
   deploy:
@@ -77,8 +34,13 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages  # ✅ Ensure we push only to gh-pages
-          folder: dist       # ✅ Ensure dist/ is used for deployment
-          token: ${{ secrets.GITHUB_TOKEN }}  # ✅ Authenticated push
+          branch: gh-pages 
+          folder: dist       
+          token: ${{ secrets.GITHUB_TOKEN }}  
+
+
+
+
+
 
 
