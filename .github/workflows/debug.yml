@@ -1,0 +1,25 @@
+name: Debug GitHub Actions Secrets
+
+on:
+  workflow_dispatch  # Allows manual trigger
+
+permissions:
+  contents: write
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Test if API Key Exists
+        run: |
+          if [ -z "${{ secrets.VITE_OPENAI_API_KEY }}" ]; then
+            echo "API Key is EMPTY. GitHub Actions cannot access the secret."
+            exit 1
+          else
+            echo "API Key is PRESENT. GitHub Actions is accessing it correctly."
+          fi
+        shell: bash
