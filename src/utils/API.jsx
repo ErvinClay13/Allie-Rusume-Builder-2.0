@@ -49,7 +49,8 @@
 import axios from "axios";
 
 const API_KEY = import.meta.env.VITE_OPENAI_API_KEY; 
-console.log("Loaded API Key:", API_KEY);  //  Check if the key is being loaded
+console.log("🔍 Loaded API Key in Production:", import.meta.env.VITE_OPENAI_API_KEY);
+
 
 export const generateContent = async (prompt) => {
   //  Check if the API Key is missing
