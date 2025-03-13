@@ -3,7 +3,7 @@ name: Deploy Vite App
 on:
   push:
     branches:
-      - main
+      - main  # Ensures deployment only happens when pushing to main
 
 permissions:
   contents: write
@@ -27,7 +27,7 @@ jobs:
       - name: Inject API Key into .env File
         run: |
           echo "VITE_OPENAI_API_KEY=${{ secrets.VITE_OPENAI_API_KEY }}" > .env
-          cat .env  # Debugging: Check if the .env file contains the API key
+          cat .env
 
       - name: Build project
         run: npm run build
@@ -37,7 +37,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
-          publish_branch: gh-pages
+          publish_branch: gh-pages  # Ensures deployment goes to gh-pages
 
 
 
