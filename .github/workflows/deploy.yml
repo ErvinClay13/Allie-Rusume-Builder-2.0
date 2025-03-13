@@ -3,10 +3,10 @@ name: Deploy Vite App to GitHub Pages
 on:
   push:
     branches:
-      - main  # Runs when pushing to main
+      - main  # Runs only when pushing to main
 
 permissions:
-  contents: write  # 🔥 Give write access to allow GitHub Actions to push
+  contents: write  # Ensures GitHub Actions can push to gh-pages
 
 jobs:
   deploy:
@@ -33,8 +33,9 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages  # Deploy to gh-pages branch
-          folder: dist       # Ensure Vite outputs to 'dist'
-          token: ${{ secrets.GITHUB_TOKEN }}  # Use GitHub's built-in token
+          folder: dist       #  This ensures dist/ is used for deployment
+          token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
+
 
 
 
