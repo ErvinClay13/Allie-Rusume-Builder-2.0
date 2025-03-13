@@ -24,7 +24,7 @@ import App from "./App";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter basename="/Allie-Rusume-Builder-2.0"> 
+  <BrowserRouter basename="/Allie-Rusume-Builder-2.0"> {/* ✅ Add basename */}
     <App />
   </BrowserRouter>
 );
